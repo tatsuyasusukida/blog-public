@@ -1,0 +1,274 @@
+@page {
+  margin: 20mm 20mm 20mm 20mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Hiragino Mincho ProN";
+  font-size: 12pt;
+  text-align: justify;
+}
+
+@media screen {
+  body {
+    background: #eeeeee;
+  }
+
+  .sect1, #preamble {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20mm;
+    margin-bottom: 10mm;
+  }
+}
+
+.sect1 {
+  page-break-before: always;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  border: 1pt solid black;
+  border-bottom: 5px double black;
+  text-align: left;
+  font-weight: normal;
+  padding: 0.25rem;
+}
+
+td {
+  border: 1pt solid black;
+  padding: 0.25rem;
+}
+
+td p {
+  margin: 0;
+  padding: 0;
+}
+
+.olist ol {
+  list-style: none;
+  margin: 0;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+.olist p {
+  display: inline;
+}
+
+ol.arabic {
+  counter-reset: ol1;
+  margin-left: 0;
+  margin-bottom: 1rem;
+  border: 1pt solid black;
+  padding: 1rem;
+}
+
+ol.arabic > li {
+  counter-increment: ol1;
+}
+
+ol.arabic > li:before {
+  content: "(" counter(ol1) ")";
+}
+
+ol.loweralpha {
+  counter-reset: ol2;
+}
+
+ol.loweralpha > li {
+  counter-increment: ol2;
+}
+
+ol.loweralpha > li:before {
+  content: "(" counter(ol1) "." counter(ol2) ")";
+}
+
+ol.lowerroman {
+  counter-reset: ol3;
+}
+
+ol.lowerroman > li {
+  counter-increment: ol3;
+}
+
+ol.lowerroman > li:before {
+  content: "(" counter(ol1) "." counter(ol2) "." counter(ol3) ")";
+}
+
+ol.upperalpha {
+  counter-reset: ol4;
+}
+
+ol.upperalpha > li {
+  counter-increment: ol4;
+}
+
+ol.upperalpha > li:before {
+  content: "(" counter(ol1) "." counter(ol2) "." counter(ol3) "." counter(ol4) ")";
+}
+
+ol.upperroman {
+  counter-reset: ol5;
+}
+
+ol.upperroman > li {
+  counter-increment: ol5;
+}
+
+ol.upperroman > li:before {
+  content: "(" counter(ol1) "." counter(ol2) "." counter(ol3) "." counter(ol4) "." counter(ol5) ")";
+}
+
+h2 {
+  font-weight: normal;
+  border-bottom: 1pt solid black;
+  font-size: 18pt;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-weight: normal;
+  font-size: 14pt;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-weight: normal;
+  font-size: 12pt;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+body {
+  counter-reset: h2;
+}
+
+h2 {
+  counter-increment: h2;
+  counter-reset: h3;
+}
+
+h2:before {
+  content: counter(h2) ". ";
+}
+
+h3 {
+  counter-increment: h3;
+  counter-reset: h4;
+}
+
+h3:before {
+  content: counter(h2) "." counter(h3) ". ";
+}
+
+h4 {
+  counter-increment: h4;
+}
+
+h4:before {
+  content: counter(h2) "." counter(h3) "." counter(h4) ". ";
+}
+
+p {
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  border: 1pt solid black;
+}
+
+.imageblock {
+  text-align: center;
+}
+
+.imageblock .title {
+  margin-bottom: 1rem;
+}
+
+.cover-project p {
+  margin-top: 60mm;
+  text-align: center;
+  font-size: 24pt;
+  border-top: 1mm solid black;
+  margin-bottom: 0;
+  padding-top: 5mm;
+}
+
+.cover-document p {
+  text-align: center;
+  font-size: 24pt;
+  border-bottom: 1mm solid black;
+  padding-bottom: 5mm;
+}
+
+.cover-version p {
+  text-align: center;
+  font-size: 12pt;
+  padding-top: 1rem;
+}
+
+.cover-date p {
+  text-align: center;
+  font-size: 12pt;
+}
+
+.cover-company p {
+  text-align: center;
+  font-size: 18pt;
+  margin-top: 50mm;
+}
+
+.cover-address p {
+  text-align: center;
+  font-size: 12pt;
+  padding-top: 1rem;
+}
+
+.cover-tel p {
+  text-align: center;
+  font-size: 12pt;
+  margin-bottom: 0;
+}
+
+.cover-email p {
+  text-align: center;
+  font-size: 12pt;
+}
+
+.cover-email a {
+  color: black;
+  text-decoration: none;
+}
+
+#header {
+  display: none;
+}
+
+#footer {
+  display: none;
+}
+
+pre {
+  border: 1pt solid black;
+  padding: 1rem;
+}
+
+code {
+  font-family: "Hiragino Mincho ProN";
+}

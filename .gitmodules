@@ -1,0 +1,3 @@
+[submodule "app/model"]
+	path = app/model
+	url = git@github.com:tatsuyasusukida/blog-model.git

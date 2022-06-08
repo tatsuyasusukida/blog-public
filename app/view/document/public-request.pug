@@ -1,0 +1,28 @@
+extends ../layout/public
+
+block title
+  title ダウンロード資料のお申し込み｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`ダウンロード資料のお申し込み｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../../') トップ
+        li.breadcrumb-item
+          a(href='../../') ダウンロード資料
+        li.breadcrumb-item
+          a(href='../') #{document.titleShort}
+        li.breadcrumb-item
+          a(href='./' aria-current='page') お申し込み
+
+block main
+  #main
+
+append script
+  script(src='/static/js/polyfill.js')
+  script(src='/static/js/vue.js')
+  script(src='/static/js/app.js')

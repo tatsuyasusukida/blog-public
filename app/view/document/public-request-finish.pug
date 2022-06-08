@@ -1,0 +1,43 @@
+extends ../layout/public
+
+block title
+  title ダウンロード資料のお申し込み完了｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`ダウンロード資料のお申し込み完了｜${layout.website.og.title}`)
+
+append meta
+  meta(name='robots' content='noindex')
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../../../') トップ
+        li.breadcrumb-item
+          a(href='../../../') ダウンロード資料
+        li.breadcrumb-item
+          a(href='../../') #{document.titleShort}
+        li.breadcrumb-item
+          a(href='../') お申し込み
+        li.breadcrumb-item
+          a(href='./' + layout.url.search aria-current='page') 完了
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 ダウンロード資料のお申し込みが完了しました
+    .container
+      .row.justify-content-center
+        .col-lg-8
+          p.mt-3
+            | この度は資料のお申し込みをいただき誠にありがとうございます。<br>
+            | 資料のダウンロードURLをメールにて送信しましたのでご確認ください。<br>
+            | 万が一メールが届かない場合は下記の「資料をダウンロードする」ボタンをご利用ください。
+          nav.mt-3(aria-label='ダウンロード')
+            .d-grid
+              a.btn.btn-success(href=`../../download/file/${layout.url.search}` target='_blank') 資料をダウンロードする
+          .mt-3
+            a(href='../../') 資料ページを表示する

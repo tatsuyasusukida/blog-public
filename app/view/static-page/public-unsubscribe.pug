@@ -1,0 +1,24 @@
+extends ../layout/public
+
+block title
+  title メールマガジンの配信停止｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`メールマガジンの配信停止｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../') トップ
+        li.breadcrumb-item
+          a(href='./' aria-current='page') メールマガジン配信停止
+
+block main
+  #main
+
+append script
+  script(src='/static/js/polyfill.js')
+  script(src='/static/js/vue.js')
+  script(src='/static/js/app.js')

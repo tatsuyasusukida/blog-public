@@ -1,0 +1,409 @@
+<div id="content">
+<div class="sect2">
+<h3 id="what-is-mockup">モックアップとは何か？</h3>
+<div class="paragraph">
+<p>モックアップとは「実物大の模型」を意味する英単語であり、アプリの要件やデザインを確認するために作成されます。
+モックアップは見た目の確認に特化しており、外観だけしか備えていないのでアプリとしては機能しません。
+モックアップを作成するメリットは、開発前にアプリのイメージを検討することで手戻りのリスクを減らせることです。
+モックアップは外観だけを備えていれば良いため、アプリと比べて低コスト・短期間で作ることができます。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/static/img/skeleton.png" alt="">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="how-to-make">モックアップを作成する方法</h3>
+<div class="paragraph">
+<p>モックアップは色々な作成することができます。
+例えばAdobe IllustratorなどのデザインソフトやExcelやPowerPointなどのオフィスソフトを使うことができます。
+紙とペンで画面イメージを描いても構いません。
+それぞれメリットやデメリットがありますが、このシリーズではWebページとしてモックアップを作成する方法を紹介します。
+Webページを作成するにはHTML/CSSコーディングの知識やスキルが必要ですが、作成したモックアップをプロトタイプ開発などに流用できるなどのメリットがあります。</p>
+</div>
+<div class="paragraph">
+<p>Webページとしてモックアップを作成する場合、作成方法は基本的にWebアプリ開発と同じですが外観に関する部分だけを作ればよい点がWebアプリ開発とは異なります。
+HTML/CSSだけでもモックアップを作ることもできますが、Webアプリ開発フレームワークを使うことで作業効率が大きく向上します。
+このシリーズではNode.jsのWebアプリ開発フレームワークである
+<a href="https://github.com/expressjs/express" target="_blank" rel="noopener">Express.js</a>
+を使い、ToDoリストを管理するWebアプリのモックアップを作成します。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="workflow">おおまかな流れ</h3>
+<div class="paragraph">
+<p>モックアップ作成のおおまかな流れは下記の通りです。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>作業環境の準備</p>
+</li>
+<li>
+<p>ビューのコーディング</p>
+</li>
+<li>
+<p>デプロイ</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>この記事では作業環境の準備をメインテーマとして下記の手順について解説します。
+作業のおおまかな流れは下記の通りです。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ディレクトリとファイルの作成</p>
+</li>
+<li>
+<p>パッケージのインストール</p>
+</li>
+<li>
+<p>ビュー以外のコーディング</p>
+</li>
+<li>
+<p>動作確認</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directory-and-file">ディレクトリとファイルの作成</h3>
+<div class="paragraph">
+<p>ターミナルを起動して下記のコマンドを実行します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">mkdir </span>todo
+<span class="nb">mkdir </span>todo/app
+<span class="nb">touch </span>todo/app/.dockerignore
+<span class="nb">touch </span>todo/app/.gitignore
+<span class="nb">touch </span>todo/app/app.js
+<span class="nb">touch </span>todo/app/Dockerfile
+<span class="nb">mkdir </span>todo/app/script
+<span class="nb">touch </span>todo/app/script/serve.js
+<span class="nb">mkdir </span>todo/app/view
+<span class="nb">mkdir </span>todo/app/view/layout
+<span class="nb">mkdir </span>todo/app/view/layout/screen.pug
+<span class="nb">mkdir </span>todo/app/view/layout/private.pug
+<span class="nb">mkdir </span>todo/app/view/todo
+<span class="nb">mkdir </span>todo/app/view/todo/mixin
+<span class="nb">touch </span>todo/app/view/todo/mixin/form-content.pug
+<span class="nb">touch </span>todo/app/view/todo/private-add-finish.pug
+<span class="nb">touch </span>todo/app/view/todo/private-add.pug
+<span class="nb">touch </span>todo/app/view/todo/private-delete-finish.pug
+<span class="nb">touch </span>todo/app/view/todo/private-delete.pug
+<span class="nb">touch </span>todo/app/view/todo/private-edit-finish.pug
+<span class="nb">touch </span>todo/app/view/todo/private-edit.pug
+<span class="nb">touch </span>todo/app/view/todo/private-index.pug
+<span class="nb">touch </span>todo/app/view/todo/private-view.pug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ディレクトリとファイルを作成できればどのような方法でも構いません。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="package">パッケージのインストール</h3>
+<div class="paragraph">
+<p>ターミナルで下記のコマンドを実行します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">cd </span>app
+npm init <span class="nt">-y</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> nodemon
+npm <span class="nb">install</span> <span class="nt">--save</span> express morgan pug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>それぞれのパッケージについては下記をご覧ください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://github.com/remy/nodemon" target="blank">nodemon</a></dt>
+<dd>
+<p>Node.jsプログラムの自動再起動ツール</p>
+</dd>
+<dt class="hdlist1"><a href="https://github.com/expressjs/express" target="blank">express</a></dt>
+<dd>
+<p>Express.js（Webアプリ開発フレームワーク）</p>
+</dd>
+<dt class="hdlist1"><a href="https://github.com/expressjs/morgan" target="blank">morgan</a></dt>
+<dd>
+<p>アクセスログを記録するためのミドルウェア</p>
+</dd>
+<dt class="hdlist1"><a href="https://github.com/pugjs/pug">pug</a></dt>
+<dd>
+<p><a href="https://haml.info/">Haml</a> ライクなテンプレートエンジン</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="coding">ビュー以外のコーディング</h3>
+<div class="paragraph">
+<p>エディタで下記のファイルを編集します。</p>
+</div>
+<div class="listingblock">
+<div class="title">app/.gitignore</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="js"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="o">/</span><span class="nx">node_modules</span><span class="o">/</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ポイントを下記に示します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>node_modulesをGit管理対象から外す</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">app/app.js</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="js"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+</pre></td><td class="code"><pre><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">morgan</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">morgan</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="p">{</span>
+  <span class="kd">constructor</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">strict routing</span><span class="dl">'</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> // <b class="conum">(1)</b>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">views</span><span class="dl">'</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">view</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">view engine</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pug</span><span class="dl">'</span><span class="p">)</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morgan</span><span class="p">(</span><span class="dl">'</span><span class="s1">dev</span><span class="dl">'</span><span class="p">))</span> // <b class="conum">(2)</b>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">./private/todo/</span><span class="dl">'</span><span class="p">))</span> // <b class="conum">(3)</b>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-index</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/add/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-add</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/add/finish/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-add-finish</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/:todoId([0-9]+)/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-view</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/:todoId([0-9]+)/edit/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-edit</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/:todoId([0-9]+)/edit/finish/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-edit-finish</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/:todoId([0-9]+)/delete/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-delete</span><span class="dl">'</span><span class="p">))</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/private/todo/delete/finish/</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">todo/private-delete-finish</span><span class="dl">'</span><span class="p">))</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> // <b class="conum">(4)</b>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">end</span><span class="p">()</span>
+    <span class="p">})</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> // <b class="conum">(5)</b>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">end</span><span class="p">()</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="nx">onRequest</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> // <b class="conum">(6)</b>
+    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">onError</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> // <b class="conum">(7)</b>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">App</span> <span class="o">=</span> <span class="nx">App</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ポイントを下記に示します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>アプリケーション設定</p>
+</li>
+<li>
+<p>ミドルウェア読み込み</p>
+</li>
+<li>
+<p>ルーティング設定</p>
+</li>
+<li>
+<p>404 Not Found処理ミドルウェアの登録</p>
+</li>
+<li>
+<p>エラー処理ミドルウェアの登録</p>
+</li>
+<li>
+<p>todo/app/script/serve.jsから呼び出し</p>
+</li>
+<li>
+<p>todo/app/script/serve.jsから呼び出し</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">app/script/serve.js</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="js"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="code"><pre><span class="kd">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">http</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">App</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../app</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nx">Main</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">run</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span> // <b class="conum">(1)</b>
+    <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">App</span><span class="p">()</span> // <b class="conum">(2)</b>
+
+    <span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">request</span><span class="dl">'</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">onRequest</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">app</span><span class="p">))</span> // <b class="conum">(3)</b>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">onError</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">app</span><span class="p">))</span> // <b class="conum">(4)</b>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">3000</span><span class="dl">'</span><span class="p">)</span> // <b class="conum">(5)</b>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">require</span><span class="p">.</span><span class="nx">main</span> <span class="o">==</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">main</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">main</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nx">Main</span><span class="p">().</span><span class="nx">run</span><span class="p">()</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ポイントを下記に示します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Webサーバーの作成</p>
+</li>
+<li>
+<p>アプリケーションサーバーの作成</p>
+</li>
+<li>
+<p>requestイベントハンドラの登録</p>
+</li>
+<li>
+<p>errorイベントハンドラの登録</p>
+</li>
+<li>
+<p>Webサーバーの待ち受け開始</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="check">動作確認</h3>
+<div class="paragraph">
+<p>動作確認のためにエディタで下記のファイルを編集します。</p>
+</div>
+<div class="listingblock">
+<div class="title">app/view/todo/private-index.pug</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="pug"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>h1 Hello World
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ターミナルで下記のコマンドを実行します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">nodemon script/serve.js</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ブラウザで
+<a href="http://localhost:3000" class="bare" target="_blank" rel="noopener">http://localhost:3000</a>
+にアクセスして「Hello World」と表示されることを確認します。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="summary">おわりに</h3>
+<div class="paragraph">
+<p>この記事ではWebアプリのモックアップを作成するための作業環境の準備について解説しました。
+次の記事ではHTMLテンプレートエンジンである
+<a href="https://pugjs.org/">Pug</a>
+を使って実際に画面イメージを作成します。</p>
+</div>
+</div>
+</div>

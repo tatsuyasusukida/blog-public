@@ -1,0 +1,34 @@
+extends ../layout/public
+
+block title
+  title #{serial.title}｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`${serial.title}｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../../') トップ
+        li.breadcrumb-item
+          a(href='../') #{category.title}
+        li.breadcrumb-item
+          a(href='./' aria-current='page') #{serial.titleShort}
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 #{serial.title}
+    .container
+      nav.mt-3(aria-label='記事')
+        .list-group
+          each article in articles
+            .list-group-item
+              article
+                a(href=`./${article.code}/`) #{article.titleShort}
+                ul.list-unstyled.mt-2.mb-0
+                  each articleSection in article.articleSections
+                    li #{articleSection.title}

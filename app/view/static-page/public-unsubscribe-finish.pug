@@ -1,0 +1,33 @@
+extends ../layout/public
+
+block title
+  title メールマガジンの配信停止完了｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`メールマガジンの配信停止完了｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../') トップ
+        li.breadcrumb-item
+          a(href='../') メールマガジン配信停止
+        li.breadcrumb-item
+          a(href='./' aria-current='page') 完了
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 メールマガジンの配信停止が完了しました
+    .container
+      .row.justify-content-center
+        .col-md-8
+          p.mt-3
+            | メールマガジンの配信停止の手続きが完了しました。<br>
+            | これまでメールマガジンをお読みいただきありがとうございました。<br>
+            | またの機会がございましたら何卒よろしくお願い申し上げます。
+          .d-grid.mt-3
+            a.btn.btn-success(href='/') トップページを表示する

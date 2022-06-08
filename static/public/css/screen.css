@@ -1,0 +1,12 @@
+.skeleton-image {
+  display: block;
+  background: rgb(248, 249, 250);
+  padding-top: 30%;
+  padding-bottom: 30%;
+  text-align: center;
+}
+
+.skeleton-image.is-1x1 {
+  padding-top: 45%;
+  padding-bottom: 45%;
+}

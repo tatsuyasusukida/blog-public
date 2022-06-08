@@ -1,0 +1,35 @@
+extends ../layout/public
+
+block title
+  title #{category.title}｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`${category.title}｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../') トップ
+        li.breadcrumb-item
+          a(href='./' aria-current='page') #{category.title}
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 #{category.title}
+    .container
+      nav.mt-3(aria-label='シリーズ')
+        .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+          each serial in serials
+            .col
+              article
+                .card
+                  a(href=`./${serial.code}/` tabindex='-1')
+                    img.card-img-top(src=serial.visual alt=serial.title)
+                  .card-body
+                    .text-muted.small.mb-2 #{serial.dateText}
+                    h3.card-title.h5.mb-0
+                      a(href=`./${serial.code}/`) #{serial.title}（全#{serial.articleCount}回）

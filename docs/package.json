@@ -1,0 +1,17 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "render": "node script/render.js",
+    "build": "mkdir -p dist && asciidoctor -D dist -a stylesheet=style.css src/*.adoc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-fetch": "^2.6.6",
+    "puppeteer": "^13.0.1"
+  }
+}

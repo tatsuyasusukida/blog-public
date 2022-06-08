@@ -1,0 +1,41 @@
+extends ../layout/public
+
+block title
+  title ダウンロードURLの有効期限が切れています｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`ダウンロードURLの有効期限が切れています｜${layout.website.og.title}`)
+
+append meta
+  meta(name='robots' content='noindex')
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../../../') トップ
+        li.breadcrumb-item
+          a(href='../../../') ダウンロード資料
+        li.breadcrumb-item
+          a(href='../../') #{document.titleShort}
+        li.breadcrumb-item
+          a(href='../') お申し込み
+        li.breadcrumb-item
+          a(href='./' aria-current='page') 期限切れ
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 有効期限が切れています
+    .container
+      .row.justify-content-center
+        .col-lg-8
+          p.mt-3
+            | 資料のダウンロードURLの有効期限が切れています。 <br>
+            | ダウンロードURLの有効期限は発行から24時間です。 <br>
+            | 誠に恐れ入りますが、改めて資料のダウンロードURLをご発行ください。
+          nav.mt-3(aria-label='メイン')
+            .d-grid
+              a.btn.btn-primary(href='../') 資料のダウンロードURLを発行する

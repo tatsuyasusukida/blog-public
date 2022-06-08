@@ -1,0 +1,105 @@
+extends ../layout/public
+include ../mixin/ad
+
+block title
+  title #{article.title}｜#{layout.website.dc.title}
+
+block ogp
+  meta(property='og:title' content=`${article.title}｜${layout.website.og.title}`)
+  meta(property='og:type' content='website')
+  meta(property='og:image' content=article.visual)
+  meta(property='og:url' content=layout.url.href)
+  meta(property='og:description' content=article.description)
+  meta(property='twitter:card' content='summary')
+
+block metadata
+  script(type='application/ld+json') !{metadata}
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../') トップ
+        li.breadcrumb-item
+          a(href='../') コラム
+        li.breadcrumb-item
+          a(href='./' aria-current='page') #{article.titleShort}
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 #{article.title}
+    .container
+      .d-lg-flex.gap-3
+        .article-column.is-main.flex-grow-1(style='flex-basis: 0')
+          img.img-fluid.mt-3(src=article.visual alt=article.title)
+          .text-muted.mt-3 #{article.dateText}
+          nav(aria-label='トピック')
+            .d-flex.flex-wrap.gap-2.mt-3
+              each topic in topics
+                a.btn.btn-light(href=`../?topic=${topic.code}`) #{topic.title}
+          p.bg-light.mt-3.p-4
+            | この記事は約#{article.minute}分で読めます。
+            if document
+              | <br>
+              | この記事の<a href="/document/!{document.code}/">PDF版</a>があります。
+          p.mt-3 #{article.description}
+          section
+            h2.h3.border-top.pt-3.mt-3.mb-3 目次
+            nav(aria-label='目次')
+              ul.list-unstyled
+                each articleSection in articleSections
+                  li
+                    a(href=articleSection.url) #{articleSection.title}
+                if author
+                  li
+                    a(href='#author') 著者について
+                if recommendedArticles.length >= 1
+                  li
+                    a(href='#recommended') 関連記事
+          section
+            h2.visually-hidden 本文
+            .article-body
+              != article.body
+          if document
+            nav(aria-label='ダウンロード資料')
+              .d-grid.mt-3
+                a.btn.btn-primary(href=`/document/${document.code}/`) この記事のPDF版をダウンロードする
+          if author
+            section
+              h2.h3.border-top.pt-3.mt-3.mb-3(id='author') 著者について
+              figure
+                .d-flex.gap-3
+                  .flex-grow-0(style='flex-basis: 80px')
+                    a(href=author.url target='_blank' tabindex='-1')
+                      img.img-fluid(src=author.visual alt=author.name)
+                  .flex-grow-1(style='flex-basis: 0')
+                    figcaption
+                      a(href=author.url target='_blank') #{author.name}｜#{author.roman}
+                    p.mt-3.mb-0 !{author.profile}
+          if recommendedArticles.length >= 1
+            section
+              h2.h3.border-top.pt-3.mt-3.mb-3(id='recommended') 関連記事
+              nav(aria-label='関連記事')
+                each recommendedArticle of recommendedArticles
+                  .d-flex.gap-3.align-items-center.mt-3
+                    .flex-grow-0(style='flex-basis: 50px')
+                      a(href=recommendedArticle.url tabindex='-1')
+                        img.img-fluid(src=recommendedArticle.visual alt='')
+                    .flex-grow-1(style='flex-basis: 0')
+                      a(href=recommendedArticle.url) #{recommendedArticle.title}
+        .article-column.is-sub.flex-grow-0.d-none.d-lg-block(style='flex-basis: 300px')
+          +ad
+          nav.sticky-top(aria-label='サブカラムの目次')
+            ul.list-unstyled.pt-3
+              each articleSection in articleSections
+                li
+                  a(href=articleSection.url) #{articleSection.title}
+              if author
+                li
+                  a(href='#author') 著者について
+              if recommendedArticles.length >= 1
+                li
+                  a(href='#recommended') 関連記事

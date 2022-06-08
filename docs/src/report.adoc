@@ -1,0 +1,137 @@
+:table-caption: 表
+:figure-caption: 図
+:imagesdir: ./img
+
+= コンテンツマーケティング運用ツール 成果物写真 第1.0版
+
+[.cover-project]
+コンテンツマーケティング運用ツール
+
+[.cover-document]
+成果物写真
+
+[.cover-version]
+第1.0版
+
+[.cover-date]
+2021年6月30日(水)
+
+[.cover-company]
+株式会社ロレムイプサム
+
+[.cover-address]
+新潟県長岡市関原南4丁目3934番地
+
+[.cover-tel]
+TEL: 0258-94-5233
+
+[.cover-email]
+E-mail: susukida@loremipsum.co.jp
+
+
+
+== トップページ
+
+=== 成果物写真
+
+.トップページの成果物写真
+image::static-page/public-home.png[]
+
+
+
+== シリーズの一覧ページ
+
+=== 成果物写真
+
+.シリーズの一覧ページの成果物写真
+image::serial/public-index.png[]
+
+
+
+== シリーズ記事の一覧ページ
+
+=== 成果物写真
+
+.シリーズ記事の一覧ページの成果物写真
+image::serial/public-view.png[]
+
+
+
+== シリーズ記事の詳細ページ
+
+=== 成果物写真
+
+.シリーズ記事の詳細ページの成果物写真
+image::serial/public-article.png[]
+
+
+
+== コラム記事の一覧ページ
+
+=== 成果物写真
+
+.コラム記事の一覧ページの成果物写真
+image::column/public-index.png[]
+
+
+
+== コラム記事の詳細ページ
+
+=== 成果物写真
+
+.コラム記事の詳細ページの成果物写真
+image::column/public-view.png[]
+
+
+
+== ダウンロード資料の一覧ページ
+
+=== 成果物写真
+
+.ダウンロード資料の一覧ページの成果物写真
+image::document/public-index.png[]
+
+
+
+== ダウンロード資料の詳細ページ
+
+=== 成果物写真
+
+.ダウンロード資料の詳細ページの成果物写真
+image::document/public-view.png[]
+
+
+
+== ダウンロード資料のお申し込みページ
+
+=== 成果物写真
+
+.ダウンロード資料のお申し込みページの成果物写真
+image::document/public-request.png[]
+
+
+
+== ダウンロード資料のお申し込み完了ページ
+
+=== 成果物写真
+
+.ダウンロード資料のお申し込み完了ページの成果物写真
+image::document/public-request-finish.png[]
+
+
+
+== メールマガジンの配信停止ページ
+
+=== 成果物写真
+
+.メールマガジンの配信停止ページの成果物写真
+image::static-page/public-unsubscribe.png[]
+
+
+
+== メールマガジンの配信停止完了ページ
+
+=== 成果物写真
+
+.メールマガジンの配信停止完了ページの成果物写真
+image::static-page/public-unsubscribe-finish.png[]

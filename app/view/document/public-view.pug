@@ -1,0 +1,66 @@
+extends ../layout/public
+include ../mixin/ad
+
+block title
+  title #{document.title}｜#{layout.website.dc.title}
+
+block ogp
+  meta(property='og:title' content=`${document.title}｜${layout.website.og.title}`)
+  meta(property='og:type' content='website')
+  meta(property='og:image' content=document.visual)
+  meta(property='og:url' content=layout.url.href)
+  meta(property='og:description' content=document.description)
+  meta(property='twitter:card' content='summary')
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../') トップ
+        li.breadcrumb-item
+          a(href='../') ダウンロード資料
+        li.breadcrumb-item
+          a(href='./' aria-current='page') #{document.titleShort}
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 #{document.title}
+    .container
+      .d-lg-flex.gap-3
+        .flex-grow-1(style='flex-basis: 0')
+          img.img-fluid.mt-3(src=document.visual alt=document.title)
+          nav(aria-label='ダウンロード')
+            .d-grid.gap-2.mt-3
+              a.btn.btn-primary(href='./request/') 資料をダウンロードする（無料）
+              a.btn.btn-secondary(href='./download/sample/' target='_blank') サンプルをダウンロードする
+          .text-muted.mt-3 #{document.dateText}
+          p.bg-light.mt-3.p-4 この資料のページ数は#{document.page}ページです。<br>
+          p.mt-3 #{document.description}
+          if documentSections.length >= 1
+            section
+              h2.h3.border-top.pt-3.mt-3.mb-3 目次
+              nav(aria-label='目次')
+                ul.list-unstyled
+                  each documentSection in documentSections
+                    li #{documentSection.title}
+                      if documentSection.documentSubsections.length >= 1
+                        ul.list-unstyled.ps-3
+                          each documentSubsection in documentSection.documentSubsections
+                            li #{documentSubsection.title}
+
+          if recommendedArticles.length >= 1
+            section
+              h2.h3.border-top.pt-3.mt-3.mb-3(id='recommended') 関連記事
+              nav(aria-label='関連記事')
+                each recommendedArticle of recommendedArticles
+                  .d-flex.gap-3.align-items-center.mt-3
+                    .flex-grow-0(style='flex-basis: 50px')
+                      a(href=recommendedArticle.url tabindex='-1')
+                        img.img-fluid(src=recommendedArticle.visual alt=recommendedArticle.title)
+                    .flex-grow-1(style='flex-basis: 0')
+                      a(href=recommendedArticle.url) #{recommendedArticle.title}
+        .flex-grow-0.d-none.d-lg-block(style='flex-basis: 300px')
+          +ad

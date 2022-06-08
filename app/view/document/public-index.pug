@@ -1,0 +1,36 @@
+extends ../layout/public
+
+block title
+  title ダウンロード資料｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`ダウンロード資料｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../../') トップ
+        li.breadcrumb-item
+          a(href='./' aria-current='page') ダウンロード資料
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 ダウンロード資料
+    .container
+      nav.mt-3(aria-label='資料')
+        .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+          - for (let i = 1; i <= 3; i += 1)
+          each document in documents
+            .col
+              article.h-100
+                .card.h-100
+                  a(href=`./${document.code}/` tabindex='-1')
+                    img.card-img-top(src=document.visual alt=document.title)
+                  .card-body
+                    .text-muted.small.mb-2 #{document.dateText}
+                    h3.card-title.h5.mb-0
+                      a(href=`./${document.code}/`) #{document.title}

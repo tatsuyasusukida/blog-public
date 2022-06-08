@@ -1,0 +1,81 @@
+extends ../layout/public
+
+block title
+  title #{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=layout.website.og.title)
+
+block breadcrumb
+  nav.mt-3.mb-3.visually-hidden(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='./' aria-current='page') トップ
+
+block main
+  main
+    .bg-light.pt-5.pb-5.visually-hidden
+      .container
+        h1.h4.mb-0 #{layout.website.dc.title}
+    .container
+      each category in categories
+        if category.serials.length >= 1
+          section
+            h2.h4.mt-3.mb-3 #{category.title}
+            nav(aria-label=category.title)
+              .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+                each serial in category.serials
+                  .col
+                    article.h-100
+                      .card.h-100
+                        a(href=`./serial/${category.code}/${serial.code}/` tabindex='-1')
+                          img.card-img-top(src=serial.visual alt='')
+                        .card-body
+                          .text-muted.small.mb-2 #{serial.dateText}
+                          h3.card-title.h5.mb-0
+                            a(href=`./serial/${category.code}/${serial.code}/`) #{serial.title}（全#{serial.articleCount}回）
+              .text-end.mt-3
+                a(href=`./serial/${category.code}/`) #{category.title}のシリーズ一覧 
+                  span(aria-hidden='true') &raquo;
+      if articles.length >= 1
+        section
+          h2.h4.mt-3.mb-3 コラム
+          nav(aria-label='コラム')
+            .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+              each article in articles
+                .col
+                  article.h-100
+                    .card.h-100
+                      a(href=`./column/${article.code}/` tabindex='-1')
+                        img.card-img-top(src=article.visual alt='')
+                      .card-body
+                        .text-muted.small.mb-2 #{article.dateText}
+                        h3.card-title.h5.mb-0
+                          a(href=`./column/${article.code}/`) #{article.title}
+                        if article.topics.length >= 1
+                          ul.list-inline.mt-2.mb-0
+                            each topic in article.topics
+                              li.list-inline-item
+                                a.btn.btn-light.btn-sm(href='./column/?topic=' + encodeURIComponent(topic.code)) #{topic.title}
+          .text-end.mt-3
+            a(href='./column/') コラム記事一覧 
+              span(aria-hidden='true') &raquo;
+      if documents.length >= 1
+        section
+          h2.h4.mt-3.mb-3 ダウンロード資料
+          nav(aria-label='ダウンロード資料')
+            .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+              each document in documents
+                .col
+                  article.h-100
+                    .card.h-100
+                      a(href=`./document/${document.code}/` tabindex='-1')
+                        img.card-img-top(src=document.visual alt='')
+                      .card-body
+                        .text-muted.small.mb-2 #{document.dateText}
+                        h3.card-title.h5.mb-0
+                          a(href=`./document/${document.code}/`) #{document.title}
+            .text-end.mt-3
+              a(href='./document/') ダウンロード資料一覧 
+                span(aria-hidden='true') &raquo;

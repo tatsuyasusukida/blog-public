@@ -1,0 +1,45 @@
+extends ../layout/public
+
+block title
+  title #{topic ? `${topic.title}に関する` : ''}コラム｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`${topic ? `${topic.title}に関する` : ''}コラム｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='../') トップ
+        li.breadcrumb-item
+          a(href='./' aria-current='page') コラム
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 #{topic ? `${topic.title}に関する` : ''}コラム
+    .container
+      a.visually-hidden-focusable.d-inline-block.mt-3(href='#article-nav') 記事ナビゲーションへ進む
+      nav.mt-3(aria-label='トピック')
+        .d-flex.flex-wrap.gap-2
+          a.btn.btn-light(href='./') すべて
+          each topic in topics
+            a.btn.btn-light(href=`./?topic=${topic.code}`) #{topic.title}
+      nav.mt-3(aria-label='記事' id='article-nav')
+        .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.g-3
+          each article in articles
+            .col
+              article.h-100
+                .card.h-100
+                  a(href=`./${article.code}/` tabindex='-1')
+                    img.card-img-top(src=article.visual alt=article.title)
+                  .card-body
+                    .text-muted.small.mb-2 #{article.dateText}
+                    h3.card-title.h5.mb-0
+                      a(href=`./${article.code}/`) #{article.title}
+                    ul.list-inline.mt-2.mb-0
+                      each topic in article.topics
+                        li.list-inline-item
+                          a.btn.btn-light.btn-sm(href=`./?topic=${topic.code}`) #{topic.title}

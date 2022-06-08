@@ -1,0 +1,30 @@
+extends ../layout/public
+
+block title
+  title お探しのページは見つかりませんでした｜#{layout.website.dc.title}
+
+block ogp-title
+  meta(property='og:title' content=`お探しのページは見つかりませんでした｜${layout.website.og.title}`)
+
+block breadcrumb
+  nav.mt-3.mb-3(aria-label='パンくずリスト')
+    .container
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href='/') トップ
+        li.breadcrumb-item
+          a(href=layout.url.href aria-current='page') 404 Not Found
+
+block main
+  main
+    .bg-light.pt-5.pb-5
+      .container
+        h1.h4.mb-0 お探しのページは見つかりませんでした
+    .container
+      .row.justify-content-center
+        .col-md-8
+          p.mt-3
+            | アクセスいただいたページは移動または削除された可能性があります。<br>
+            | 誠に恐れ入りますがトップページからお求めのページをお探しください。
+          .d-grid.mt-3
+            a.btn.btn-primary(href='/') トップページを表示する
