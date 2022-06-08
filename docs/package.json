@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "node-fetch": "^2.6.6",
     "puppeteer": "^13.0.1"
